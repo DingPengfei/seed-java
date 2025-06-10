@@ -142,7 +142,7 @@ cd xiaozhi-esp32-server-java
 
 ```bash
 mvn clean package -DskipTests
-java -jar target/xiaozhi.server-1.0.jar &
+java -jar target/seed.server-1.0.jar &
 ```
 
 ### 9.3 前端部署
@@ -172,8 +172,8 @@ After=syslog.target network.target
 
 [Service]
 User=root
-WorkingDirectory=/path/to/xiaozhi-esp32-server-java
-ExecStart=/usr/bin/java -jar target/xiaozhi.server-1.0.jar
+WorkingDirectory=/path/to/seed-esp32-server-java
+ExecStart=/usr/bin/java -jar target/seed.server-1.0.jar
 SuccessExitStatus=143
 Restart=always
 RestartSec=10
@@ -305,5 +305,5 @@ sudo systemctl enable nginx
    增加JVM内存：
 
    ```bash
-   java -Xms512m -Xmx1024m -jar target/xiaozhi.server-1.0.jar
+   java -Xms512m -Xmx1024m -jar target/seed.server-1.0.jar
    ```

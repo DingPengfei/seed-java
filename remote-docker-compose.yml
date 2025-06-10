@@ -1,0 +1,102 @@
+services:
+  # Application service - test environment
+  # seed-java:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: seed-java:test
+  #   container_name: seed-java-test
+  #   restart: always
+  #   ports:
+  #     - "8880:8880"
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=test
+  #     - JAVA_OPTS=-Xms256m -Xmx512m
+  #   volumes:
+  #     - ./logs:/app/logs
+  #   networks:
+  #     - seed-test-network
+  #   depends_on:
+  #     - redis
+  server:
+    ports:
+      - "8091:8091"
+    networks:
+      - seed-test-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.124.36:3306/xiaozhi?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=xiaozhi
+      - SPRING_DATASOURCE_PASSWORD=aAm5tbhb4oyxpbk
+    volumes:
+      # - maven_repo:/root/.m2/repository  # 持久化Maven仓库
+      - vosk_models:/vosk_cache  # 持久化Vosk模型
+    restart: on-failure  # 添加重启策略，如果启动失败会自动重试
+
+  emqx:
+    image: emqx/emqx:5.8.6 # Or choose a specific 5.x version you prefer
+    container_name: emqx-broker
+    ports:
+      - "1883:1883"      # MQTT TCP
+      - "8883:8883"      # MQTT SSL
+      - "8083:8083"      # MQTT WebSockets
+      - "8084:8084"      # MQTT WebSockets SSL
+      - "18083:18083"    # EMQX Dashboard & API
+    volumes:
+      - emqx_data:/opt/emqx/data
+      - emqx_log:/opt/emqx/log
+      # If you need to load custom plugins or configuration:
+      # - ./my-emqx-plugins/:/opt/emqx/plugins
+      # - ./my-emqx.conf:/opt/emqx/etc/emqx.conf # For EMQX 4.x
+      # - ./my-emqx-config/emqx.conf:/opt/emqx/etc/emqx.conf # For EMQX 5.x main config
+      # - ./my-emqx-config/plugins/:/opt/emqx/etc/plugins/ # For EMQX 5.x plugin configs
+    environment:
+      # Basic EMQX 5.x configuration. Refer to EMQX docs for more.
+      # https://www.emqx.io/docs/en/v5.0/admin/cfg.html#configure-with-environment-variables
+      - "EMQX_NODE_NAME=emqx@node1.emqx.io" # Must be in name@host format
+      - "EMQX_CLUSTER__DISCOVERY_STRATEGY=static"
+      - "EMQX_CLUSTER__STATIC__SEEDS=[]" # For single node, no seeds needed
+      # Default dashboard user: admin/public. CHANGE THIS IN PRODUCTION!
+      - "EMQX_DASHBOARD__DEFAULT_USER__LOGIN=admin"
+      - "EMQX_DASHBOARD__DEFAULT_USER__PASSWORD=d1p0f8123" # !! CHANGE THIS !!
+      # Example: If you want EMQX to use Redis for authentication/ACL (requires emqx_auth_redis plugin)
+      # You would need to configure the emqx_auth_redis plugin, possibly by mounting a config file
+      # or using more specific EMQX environment variables if available for that plugin.
+      # This docker-compose setup makes Redis available TO EMQX, but doesn't configure EMQX to use it yet.
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - seed-test-network
+
+  redis:
+    image: redis:7.2-alpine # Or choose a specific version
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    # command: redis-server --appendonly yes # Example: enable AOF persistence
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - seed-test-network
+
+volumes:
+  emqx_data:
+    driver: local
+  emqx_log:
+    driver: local
+  redis_data:
+    driver: local
+  vosk_models:  # 持久化Vosk模型
+
+networks:
+  seed-test-network:
+    driver: bridge

@@ -7,10 +7,10 @@
         <version>3.3.0</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.xiaozhi.server</groupId>
-    <artifactId>xiaozhi.server</artifactId>
+    <groupId>com.seed.server</groupId>
+    <artifactId>server</artifactId>
     <version>3.3.0</version>
-    <name>xiaozhi-server</name>
+    <name>seed-java</name>
     <description></description>
 
     <properties>
@@ -89,10 +89,16 @@
             <artifactId>spring-ai-starter-mcp-client</artifactId>
         </dependency>
         <!-- 数据库 -->
+<!--        <dependency>-->
+<!--            <groupId>org.mybatis.spring.boot</groupId>-->
+<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
+<!--            <version>3.0.3</version>-->
+<!--        </dependency>-->
+        <!-- Swagger OpenAPI -->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
         </dependency>
         <!-- 分页 -->
         <dependency>
@@ -261,6 +267,12 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.110.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+            <version>3.5.5</version>
         </dependency>
     </dependencies>
 

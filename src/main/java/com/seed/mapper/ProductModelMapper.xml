@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seed.dao.ProductModelMapper">
+
+    <resultMap id="BaseResultMap" type="com.seed.entity.ProductModel">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="chName" column="ch_name" jdbcType="VARCHAR"/>
+            <result property="enName" column="en_name" jdbcType="VARCHAR"/>
+            <result property="instruction" column="instruction" jdbcType="VARCHAR"/>
+            <result property="logo" column="logo" jdbcType="VARCHAR"/>
+            <result property="category" column="category" jdbcType="CHAR"/>
+            <result property="modelCode" column="model_code" jdbcType="VARCHAR"/>
+            <result property="info" column="info" jdbcType="VARCHAR"/>
+            <result property="createOperatorMan" column="create_operator_man" jdbcType="VARCHAR"/>
+            <result property="createOperatorId" column="create_operator_id" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="modifyOperatorMan" column="modify_operator_man" jdbcType="VARCHAR"/>
+            <result property="modifyOperatorId" column="modify_operator_id" jdbcType="VARCHAR"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,ch_name,en_name,
+        instruction,logo,category,
+        model_code,info,create_operator_man,
+        create_operator_id,gmt_create,modify_operator_man,
+        modify_operator_id,gmt_modified,is_deleted
+    </sql>
+</mapper>

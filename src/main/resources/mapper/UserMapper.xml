@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seed.dao.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.seed.entity.User">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="code" column="code" jdbcType="VARCHAR"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="phone" column="phone" jdbcType="VARCHAR"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="passwd" column="passwd" jdbcType="VARCHAR"/>
+            <result property="spaceCode" column="space_code" jdbcType="VARCHAR"/>
+            <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+            <result property="familyRole" column="family_role" jdbcType="CHAR"/>
+            <result property="birthDate" column="birth_date" jdbcType="DATE"/>
+            <result property="gender" column="gender" jdbcType="CHAR"/>
+            <result property="voicePrintFile" column="voice_print_file" jdbcType="VARCHAR"/>
+            <result property="createOperatorMan" column="create_operator_man" jdbcType="VARCHAR"/>
+            <result property="createOperatorId" column="create_operator_id" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="modifyOperatorMan" column="modify_operator_man" jdbcType="VARCHAR"/>
+            <result property="modifyOperatorId" column="modify_operator_id" jdbcType="VARCHAR"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,code,name,
+        phone,email,passwd,
+        space_code,avatar,family_role,
+        birth_date,gender,voice_print_file,
+        create_operator_man,create_operator_id,gmt_create,
+        modify_operator_man,modify_operator_id,gmt_modified,
+        is_deleted
+    </sql>
+</mapper>

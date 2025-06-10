@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seed.dao.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.seed.entity.Product">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="bindUserId" column="bind_user_id" jdbcType="BIGINT"/>
+            <result property="productCode" column="product_code" jdbcType="VARCHAR"/>
+            <result property="chipUid" column="chip_uid" jdbcType="VARCHAR"/>
+            <result property="macAddress" column="mac_address" jdbcType="VARCHAR"/>
+            <result property="customUid" column="custom_uid" jdbcType="VARCHAR"/>
+            <result property="spaceCode" column="space_code" jdbcType="VARCHAR"/>
+            <result property="productModelId" column="product_model_id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="wakeupWord" column="wakeup_word" jdbcType="VARCHAR"/>
+            <result property="config" column="config" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="CHAR"/>
+            <result property="createOperatorMan" column="create_operator_man" jdbcType="VARCHAR"/>
+            <result property="createOperatorId" column="create_operator_id" jdbcType="VARCHAR"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="TIMESTAMP"/>
+            <result property="modifyOperatorMan" column="modify_operator_man" jdbcType="VARCHAR"/>
+            <result property="modifyOperatorId" column="modify_operator_id" jdbcType="VARCHAR"/>
+            <result property="gmtModified" column="gmt_modified" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="CHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,bind_user_id,product_code,
+        chip_uid,mac_address,custom_uid,
+        space_code,product_model_id,name,
+        wakeup_word,config,status,
+        create_operator_man,create_operator_id,gmt_create,
+        modify_operator_man,modify_operator_id,gmt_modified,
+        is_deleted
+    </sql>
+</mapper>

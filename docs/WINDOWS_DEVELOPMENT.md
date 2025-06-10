@@ -122,7 +122,7 @@
    ```
 4. 运行后端服务：
    ```bash
-   java -jar target\xiaozhi.server-1.0.jar
+   java -jar target\seed.server-1.0.jar
    ```
 
 ## 前端部署（Windows）
